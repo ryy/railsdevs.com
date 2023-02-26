@@ -125,4 +125,6 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |user| SidekiqPolicy.new(user).visible? } do
     mount Sidekiq::Web => "/sidekiq"
   end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
